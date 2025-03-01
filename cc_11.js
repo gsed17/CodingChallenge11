@@ -81,26 +81,27 @@ library.addBook(book1);
 library.listBooks(); // Expected output: Details of "The Great Gatsby"
 console.log("\n");
 
-// Task 4 - Implementing Book Borrowing
-Library.prototype.lendBook = function (borrowerId, isbn) {
-    const book = this.books.find(book => book.isbn === isbn);
-    const borrower = this.borrowers.find(borrower => borrower.borrowerId === borrowerId);
+    // Task 4 - Implementing Book Borrowing
 
-    if (!book || !borrower) {
-        console.log("Book or borrower not found.");
-        return;
+    // Method to lend a book to a borrower
+    lendBook(borrowerId, isbn) {
+        // Finds the book by ISBN
+        let book = this.books.find(book => book.isbn === isbn);
+        
+        // Finds the borrower by ID
+        let borrower = this.borrowers.find(borrower => borrower.borrowerId === borrowerId); 
+        
+        // Decreases the number of available copies
+        if (book && book.copies > 0 && borrower) {
+            book.updateCopies(-1);
+            
+            // Adds the book to the borrower's borrowed books list
+            borrower.borrowBook(book.title);
+        } else {
+            console.log("Book not available");
+        }
     }
-    if (book.copies === 0) {
-        console.log("No copies available.");
-        return;
-    }
-
-    book.updateCopies(-1);
-    borrower.borrowBook(book.title);
-    console.log(`Book "${book.title}" borrowed by ${borrower.name}.`);
-};
-
-// Test Task 4
+    // Test Task 4
 console.log("Task 4 Tests:");
 library.addBorrower(borrower1);
 library.lendBook(201, 123456);
