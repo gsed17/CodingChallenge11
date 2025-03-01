@@ -16,7 +16,6 @@ class Book {
     }
 }
 //Test Task 1
-console.log("Task 1 Tests:");
 const book1 = new Book("The Great Gatsby", "F. Scott Fitzgerald", 123456, 5);
 console.log(book1.getDetails()); // Expected output: Book details
 book1.updateCopies(-1);
@@ -46,7 +45,6 @@ class Borrower {
 }
 
 //Test Task 2
-console.log("Task 2 Tests:");
 const borrower1 = new Borrower("Alice Johnson", 201);
 borrower1.borrowBook("The Great Gatsby");
 console.log(borrower1.borrowedBooks); // Expected output: ["The Great Gatsby"]
@@ -75,7 +73,6 @@ class Library {
 }
 
 // Test Task 3
-console.log("Task 3 Tests:");
 const library = new Library();
 library.addBook(book1);
 library.listBooks(); // Expected output: Details of "The Great Gatsby"
@@ -102,9 +99,34 @@ console.log("\n");
         }
     }
     // Test Task 4
-console.log("Task 4 Tests:");
 library.addBorrower(borrower1);
 library.lendBook(201, 123456);
 console.log(book1.getDetails()); // Expected output: Copies reduced
 console.log(borrower1.borrowedBooks); // Expected output: ["The Great Gatsby"]
+console.log("\n");
+
+    // Task 5 - Implementing Book Returns
+
+    // Method to return a book to the library
+    returnBook(borrowerId, isbn) {
+        // Finds the book by ISBN
+        let book = this.books.find(book => book.isbn === isbn);
+        
+        // Finds the borrower by ID
+        let borrower = this.borrowers.find(borrower => borrower.borrowerId === borrowerId);
+        
+        if (book && borrower && borrower.borrowedBooks.includes(book.title)) {
+            // Increases the number of available copies
+            book.updateCopies(1);
+            
+            // Removes the book from the borrower's borrowed books list
+            borrower.returnBook(book.title);
+        } else {
+            console.log("Book not found in the borrower's records.");
+        }
+    }
+// Test Task 5
+library.returnBook(201, 123456);
+console.log(book1.getDetails()); // Expected output: Copies restored
+console.log(borrower1.borrowedBooks); // Expected output: []
 console.log("\n");
