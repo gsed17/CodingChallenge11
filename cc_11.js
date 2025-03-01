@@ -15,7 +15,7 @@ class Book {
         this.copies += quantity;
     }
 }
-//Test Task 1
+//Test for Task 1
 const book1 = new Book("The Great Gatsby", "F. Scott Fitzgerald", 123456, 5);
 console.log(book1.getDetails()); // Expected output: Book details
 book1.updateCopies(-1);
@@ -44,7 +44,7 @@ class Borrower {
     }
 }
 
-//Test Task 2
+//Test for Task 2
 const borrower1 = new Borrower("Alice Johnson", 201);
 borrower1.borrowBook("The Great Gatsby");
 console.log(borrower1.borrowedBooks); // Expected output: ["The Great Gatsby"]
@@ -72,7 +72,7 @@ class Library {
     }
 }
 
-// Test Task 3
+// Test for Task 3
 const library = new Library();
 library.addBook(book1);
 library.listBooks(); // Expected output: Details of "The Great Gatsby"
@@ -98,7 +98,7 @@ console.log("\n");
             console.log("Book not available");
         }
     }
-    // Test Task 4
+    // Test for Task 4
 library.addBorrower(borrower1);
 library.lendBook(201, 123456);
 console.log(book1.getDetails()); // Expected output: Copies reduced
@@ -125,7 +125,7 @@ console.log("\n");
             console.log("Book not found in the borrower's records.");
         }
     }
-// Test Task 5
+// Test for Task 5
 library.returnBook(201, 123456);
 console.log(book1.getDetails()); // Expected output: Copies restored
 console.log(borrower1.borrowedBooks); // Expected output: []
